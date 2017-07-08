@@ -21,7 +21,7 @@ LOCATION  '/user/w205/political_tweets/tweets';
 #
 # result: 545
 
-#
+# Finding most frequent tweeters
 #
 # SELECT screen_name, COUNT(screen_name) as cnt
 # FROM tweets t LATERAL VIEW
