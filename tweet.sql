@@ -4,6 +4,14 @@ CREATE EXTERNAL TABLE tweets
 )
 LOCATION  '/user/w205/political_tweets/tweets';
 
+
+CREATE EXTERNAL TABLE users
+(
+    value STRING
+)
+LOCATION '/user/w205/political_tweets/users';
+
+
 CREATE TABLE tweet AS
 SELECT 
     id,
@@ -18,6 +26,40 @@ FROM tweets t LATERAL VIEW JSON_TUPLE(t.value,
     'text',
     'created_at'
 ) fields AS id, user_id, screen_name, text, created_at;
+
+
+CREATE TABLE user AS
+SELECT
+    id,
+    name,
+    screen_name,
+    location,
+    followers_count,
+    friends_count,
+    statuses_count,
+    created_at
+FROM users u LATERAL VIEW JSON_TUPLE(u.value,
+    'id',
+    'name',
+    'screen_name',
+    'location',
+    'followers_count',
+    'friends_count',
+    'statuses_count',
+    'created_at'
+) fields AS     
+    id,
+    name,
+    screen_name,
+    location,
+    followers_count,
+    friends_count,
+    statuses_count,
+    created_at;
+
+
+
+
 
 # following the approach recommended here: https://stackoverflow.com/a/13368942/6781104
 
