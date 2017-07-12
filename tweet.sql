@@ -11,6 +11,16 @@ CREATE EXTERNAL TABLE users
 )
 LOCATION '/user/w205/political_tweets/users';
 
+CREATE EXTERNAL TABLE hashtags
+(
+    id string,
+    tweet_id string,
+    hashtag string
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE
+LOCATION '/user/w205/political_tweets/hashtags';  
 
 CREATE TABLE tweet AS
 SELECT 
@@ -58,6 +68,8 @@ FROM users u LATERAL VIEW JSON_TUPLE(u.value,
     created_at;
 
 
+CREATE TABLE hashtag AS
+SELECT * FROM hashtags;
 
 
 
