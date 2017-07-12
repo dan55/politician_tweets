@@ -12,12 +12,7 @@ with open('tweets.json') as f:
 
         if hashtags:
             for hashtag in hashtags:
-                try:
-                    row = ','.join( [ str(id), str(tweet_id), str(hashtag['text']) ] )
-                    row += '\n'
-                except UnicodeEncodeError:
-                    pass
-                     #row = str(id) + str(tweet_id) + hashtag['text'].encode('utf-8')
+                row = ','.join( [ str(id), str(tweet_id), hashtag['text'].encode('utf-8'), '\n' ] )
 
                 csv.write(row)
 
